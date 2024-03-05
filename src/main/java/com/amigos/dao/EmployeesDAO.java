@@ -6,6 +6,14 @@ import com.amigos.entities.Employees;
 
 public interface EmployeesDAO {
 	
-	public abstract List<Employees> getAllEmployees();
+	List<Employees> getAllEmployees();
+	
+	void addEmployee(Employees employee);
+	
+	void updateEmployee(Employees employee);
+	
+	void deleteEmployee(int employeeId);
+	
+	Employees getEmployeeById(int employeeId);
 
 }

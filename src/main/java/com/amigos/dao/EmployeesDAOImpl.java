@@ -2,37 +2,53 @@ package com.amigos.dao;
 
 import java.util.List;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.jdbc.core.JdbcTemplate;
+import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
-import com.amigos.config.JdbcConfig;
 import com.amigos.entities.Employees;
 
+import jakarta.persistence.EntityManager;
+import jakarta.transaction.Transactional;
+
+@Repository
+@Transactional
 public class EmployeesDAOImpl implements EmployeesDAO {
 	
-	private JdbcTemplate jdbcTemplate;
-
-	public JdbcTemplate getJdbcTemplate() {
-		return jdbcTemplate;
-	}
-
-	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
-		this.jdbcTemplate = jdbcTemplate;
-	}
+	@Autowired
+	private EntityManager entityManager;
 
 	@Override
 	public List<Employees> getAllEmployees() {
-		// TODO Auto-generated method stub
-		System.out.println("running...");
-		return null;
-		//return this.getJdbcTemplate().queryForList("select * from employees");
-	}
-	
-	public static void main(String[] args) {
-		ApplicationContext ctx = new AnnotationConfigApplicationContext(JdbcConfig.class);
-		EmployeesDAO employeesDAO = ctx.getBean("employeesDAO", EmployeesDAO.class);
-		employeesDAO.getAllEmployees();
+		
+		//Session session = entityManager.unwrap(Session.class);
+		//session.createQuery("from Employees", Employees.class).getResultList();
+		
+		return entityManager.unwrap(Session.class).createQuery("from Employees", Employees.class).getResultList();
 	}
 
+	@Override
+	public void addEmployee(Employees employee) {
+		
+		entityManager.unwrap(Session.class).saveOrUpdate(employee);
+	}
+
+	@Override
+	public void updateEmployee(Employees employee) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteEmployee(int employeeId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Employees getEmployeeById(int employeeId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 }
