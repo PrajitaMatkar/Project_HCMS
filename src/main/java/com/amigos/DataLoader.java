@@ -29,7 +29,7 @@ public class DataLoader implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		
-		Roles role1 = new Roles();
+	/*	Roles role1 = new Roles();
 		role1.setRoleName("Manager");
 		role1.setDescription("Manager role desc");
 		roleService.addRole(role1);
@@ -96,7 +96,7 @@ public class DataLoader implements CommandLineRunner {
 		emp1.setRole(role1);
 		
 		employeeService.addEmployee(manager);
-		employeeService.addEmployee(emp1);
+		employeeService.addEmployee(emp1);  */
 		
 	}
 
